@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<title>OLX callback</title>
+<style>
+  body { font: 16px/1.5 system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 16px; }
+  textarea { width: 100%; height: 6em; font: 14px monospace; }
+  button { font-size: 16px; padding: 6px 14px; margin-top: 8px; }
+</style>
+</head>
+<body>
+<h1>Autoryzacja OLX</h1>
+<p id="info">Skopiuj poniższy adres i wklej go w terminalu (<code>olx_api.py auth</code>).
+Kod jest ważny 10 minut.</p>
+<textarea id="url" readonly></textarea>
+<button onclick="navigator.clipboard.writeText(document.getElementById('url').value)">Kopiuj</button>
+<script>
+  // Strona nic nie wysyła — tylko pokazuje adres z kodem do skopiowania.
+  document.getElementById('url').value = location.href;
+  if (!new URLSearchParams(location.search).get('code')) {
+    document.getElementById('info').textContent = 'Brak parametru "code" w adresie.';
+  }
+</script>
+</body>
+</html>
